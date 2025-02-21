@@ -192,7 +192,7 @@ const ShaderMaterial = ({
   uniforms: Uniforms;
 }) => {
   const { size } = useThree();
-  const ref = useRef<THREE.Mesh | null>(null);
+  const ref = useRef<THREE.Mesh>(null!);
   let lastFrameTime = 0;
 
   useFrame(({ clock }) => {
@@ -282,7 +282,7 @@ const ShaderMaterial = ({
   }, [size.width, size.height, source]);
 
   return (
-    <mesh ref={ref as React.RefObject<THREE.Mesh>}>
+    <mesh ref={ref}>
       <planeGeometry args={[2, 2]} />
       <primitive object={material} attach="material" />
     </mesh>
