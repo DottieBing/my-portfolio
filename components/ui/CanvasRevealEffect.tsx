@@ -1,19 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Canvas, useFrame, useThree, Object3DNode } from "@react-three/fiber";
+import { Canvas, useFrame, useThree, } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
-
-// Extend JSX.IntrinsicElements to include Three.js elements
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      mesh: Object3DNode<THREE.Mesh, typeof THREE.Mesh>;
-      planeGeometry: Object3DNode<THREE.PlaneGeometry, typeof THREE.PlaneGeometry>;
-      shaderMaterial: Object3DNode<THREE.ShaderMaterial, typeof THREE.ShaderMaterial>;
-    }
-  }
-}
 
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
