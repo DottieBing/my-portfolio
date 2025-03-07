@@ -1,8 +1,29 @@
+
 "use client";
 import { cn } from "@/lib/utils";
-import { Canvas, useFrame, useThree, } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
+
+// We need to extend JSX.IntrinsicElements to include three.js elements
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      mesh: React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { ref?: React.RefObject<THREE.Mesh> },
+        HTMLElement
+      >;
+      planeGeometry: React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { args?: [number, number] },
+        HTMLElement
+      >;
+      primitive: React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { object: any; attach: string },
+        HTMLElement
+      >;
+    }
+  }
+}
 
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
@@ -214,7 +235,7 @@ const ShaderMaterial = ({
           break;
         case "uniform3f":
           preparedUniforms[uniformName] = {
-            value: new THREE.Vector3().fromArray(uniform.value),
+            value: new THREE.Vector3().fromArray(uniform.value as number[]),
             type: "3f",
           };
           break;
@@ -223,7 +244,7 @@ const ShaderMaterial = ({
           break;
         case "uniform3fv":
           preparedUniforms[uniformName] = {
-            value: uniform.value.map((v: number[]) =>
+            value: (uniform.value as number[][]).map((v: number[]) =>
               new THREE.Vector3().fromArray(v)
             ),
             type: "3fv",
@@ -231,7 +252,7 @@ const ShaderMaterial = ({
           break;
         case "uniform2f":
           preparedUniforms[uniformName] = {
-            value: new THREE.Vector2().fromArray(uniform.value),
+            value: new THREE.Vector2().fromArray(uniform.value as number[]),
             type: "2f",
           };
           break;
@@ -280,14 +301,6 @@ const ShaderMaterial = ({
   );
 };
 
-const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
-  return (
-    <Canvas className="absolute inset-0 h-full w-full">
-      <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
-    </Canvas>
-  );
-};
-
 interface ShaderProps {
   source: string;
   uniforms: {
@@ -298,3 +311,13 @@ interface ShaderProps {
   };
   maxFps?: number;
 }
+
+const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
+  return (
+    <Canvas className="absolute inset-0 h-full w-full">
+      <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
+    </Canvas>
+  );
+};
+
+export default CanvasRevealEffect;

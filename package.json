@@ -12,7 +12,7 @@
     "@loaders.gl/core": "^4.3.3",
     "@loaders.gl/gltf": "^4.3.3",
     "@next/font": "^14.2.15",
-    "@react-three/drei": "^9.121.4",
+    "@react-three/drei": "^9.122.0",
     "@sentry/nextjs": "^8.51.0",
     "@tabler/icons-react": "^3.29.0",
     "autoprefixer": "^10.4.20",
@@ -32,8 +32,9 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.172.0",
-    "three-globe": "^2.41.4",
-    "three-mesh-bvh": "^0.8.0"
+    "three-globe": "^2.41.12",
+    "three-mesh-bvh": "^0.8.0",
+    "vercel": "^41.2.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
