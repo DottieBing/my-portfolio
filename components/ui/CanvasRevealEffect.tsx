@@ -5,26 +5,6 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-// We need to extend JSX.IntrinsicElements to include three.js elements
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      mesh: React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { ref?: React.RefObject<THREE.Mesh> },
-        HTMLElement
-      >;
-      planeGeometry: React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { args?: [number, number] },
-        HTMLElement
-      >;
-      primitive: React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { object: any; attach: string },
-        HTMLElement
-      >;
-    }
-  }
-}
-
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
   opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
